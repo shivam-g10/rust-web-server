@@ -1,0 +1,9 @@
+[package]
+name = "web_server"
+version = "0.1.0"
+edition = "2021"
+authors = ["Shivam Mathur <shivam@kodingkorp.com>"]
+description = "A personalized Rust backend web server for quick releases"
+rust-version = "1.79.0"
+
+[dependencies]
