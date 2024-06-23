@@ -13,6 +13,9 @@ IAM_JWT_SECRET=TEST_SECRET
 3. `cargo install cargo-watch`
 4. `cargo watch -x run`
 
+### Tests
+```cargo test```
+
 ### Structure
 
 ```shell
@@ -30,7 +33,7 @@ IAM_JWT_SECRET=TEST_SECRET
 │   │   │   │   ├── controllers # holds all routes maintained by IAM
 │   │   │   │   │   ├── authentication # Authentication routes
 │   │   │   │   │   ├── users # user level protected routes
-│   │   │   │   ├── entities # database entities
+│   │   │   │   ├── entities # database entities managed by IAM
 │   │   │   │   ├── enums 
 │   │   │   │   ├── helpers # general utility methods
 │   │   │   │   ├── models # IAM specific models
@@ -40,10 +43,10 @@ IAM_JWT_SECRET=TEST_SECRET
 │   │   │   │   │   ├── users
 │   │   │   │   ├── constants.rs # Constants of IAM
 │   │   ├── routes # General routes
-│   │   ├── types # General Types
 │   │   ├── bootstrap.rs # Bootstrap the poem App
 │   ├── lib.rs 
 │   └── main.rs # Entry point
+├── .env
 ├── Cargo.lock
 ├── Cargo.toml
 ├── LICENSE

@@ -1,7 +1,7 @@
 use crate::app::capabilities::{
     common::config::config_service::ConfigService, iam::enums::auth_error::AuthError,
 };
-use bcrypt::{hash, verify, DEFAULT_COST};
+use bcrypt::{hash, verify};
 use chrono::Utc;
 use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
 use serde::{Deserialize, Serialize};
@@ -90,7 +90,7 @@ impl AuthSerivce {
 
     /// Create hash of string
     pub fn hash(&self, string: String) -> String {
-        hash(string, DEFAULT_COST).unwrap()
+        hash(string, self.config.get_env::<u32>("BCRYPT_SALT")).unwrap()
     }
 
     /// verify a hash
