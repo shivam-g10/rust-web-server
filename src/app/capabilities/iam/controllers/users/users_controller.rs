@@ -2,7 +2,7 @@ use poem::web::Data;
 use poem_openapi::{payload::Json, ApiResponse, OpenApi, Tags};
 
 use crate::app::capabilities::{
-    common::inter_service_models::{api_error::ApiError, app_state::AppState, session_user::SessionUser},
+    common::global_model::{api_error::ApiError, app_state::AppState, session_user::SessionUser},
     iam::{helpers, models::user_data::UserData},
 };
 

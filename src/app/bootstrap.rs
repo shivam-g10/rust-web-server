@@ -8,7 +8,7 @@ use sea_orm::DatabaseConnection;
 use crate::app::capabilities::{
     common::{
         config::config_service::ConfigService,
-        inter_service_models::app_state::{AppState, ServiceList},
+        global_model::app_state::{AppState, ServiceList},
     },
     iam::{controllers::authentication::auth_controllers, services::iam::iam_service::IAMService},
 };

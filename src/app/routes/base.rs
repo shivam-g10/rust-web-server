@@ -1,7 +1,7 @@
 use poem::web::Data;
 use poem_openapi::{payload::Json, ApiResponse, Object, OpenApi, Tags};
 
-use crate::app::capabilities::common::inter_service_models::app_state::AppState;
+use crate::app::capabilities::common::global_model::app_state::AppState;
 
 #[derive(Debug, Object, Clone, Eq, PartialEq)]
 pub struct Ping {

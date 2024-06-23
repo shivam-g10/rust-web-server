@@ -1,6 +1,6 @@
 use super::{entities::users::Model as UserModel, models::user_data::UserData};
 
-use crate::app::capabilities::common::inter_service_models::session_user::SessionUser;
+use crate::app::capabilities::common::global_model::session_user::SessionUser;
 
 
 pub fn user_to_session(user: UserModel) -> SessionUser {

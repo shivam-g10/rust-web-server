@@ -3,7 +3,7 @@ use config::config_service::ConfigService;
 use constants::Constants;
 use entities::users::Model as UserModel;
 use enums::auth_error::AuthError;
-use inter_service_models::session_user::SessionUser;
+use global_model::session_user::SessionUser;
 use sea_orm::DatabaseConnection;
 
 use super::super::super::*;
