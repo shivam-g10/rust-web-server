@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+    postgresql:
+        container_name: postgresql_kodingkorp
+        environment:
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+        image: postgres:latest
+        network_mode: host
+        expose:
+            - 5432
+        volumes:
+        - ./postgres_data:/var/lib/postgresql/data
+    mailer:
+        image: mailtutan/mailtutan:latest
+        restart: unless-stopped
+        ports:
+            - 1080:1080
+            - 1025:1025
+        network_mode: host
+
+volumes:
+    postgres_data:

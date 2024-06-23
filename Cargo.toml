@@ -5,5 +5,27 @@ edition = "2021"
 authors = ["Shivam Mathur <shivam@kodingkorp.com>"]
 description = "A personalized Rust backend web server for quick releases"
 rust-version = "1.79.0"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+
+[workspace]
+members = [".", "migration"]
 
 [dependencies]
+poem = { version = "3.0.1" }
+poem-openapi = { version = "5.0.2", features = ["swagger-ui", "email", "uuid"] }
+tokio = { version = "1.38.0", features = ["full"] }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18" , features = ["env-filter"] }
+migration = { path = "./migration" }
+uuid = { version = "^1.6.0", features = ["v4"] }
+dotenvy = "0.15.7"
+serde = { version = "1.0.203", features = ["derive"] }
+serde_json = "1.0.117"
+chrono = "0.4.38"
+lettre = "0.11.7"
+tera = "1.20.0"
+jsonwebtoken = "9.3.0"
+validator = { version = "0.18.1", features = ["derive", "validator_derive"] } 
+sea-orm = { version = "0.12.15", features = ["sqlx-postgres", "runtime-tokio-native-tls", "with-uuid"] }
+mockall = "0.12.1"
