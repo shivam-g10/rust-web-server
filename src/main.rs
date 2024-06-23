@@ -1,7 +1,7 @@
 use std::path::Path;
 
 use poem::listener::TcpListener;
-use prod_server::server::app::{build_app, make_app_state};
+use server::app::bootstrap::{build_app, make_app_state};
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {

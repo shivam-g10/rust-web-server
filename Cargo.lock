@@ -3081,6 +3081,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "server"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "dotenvy",
+ "jsonwebtoken",
+ "lettre",
+ "migration",
+ "mockall",
+ "poem",
+ "poem-openapi",
+ "sea-orm",
+ "serde",
+ "serde_json",
+ "tera",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "uuid",
+ "validator",
+]
+
+[[package]]
 name = "sha1"
 version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4109,29 +4132,6 @@ checksum = "77afa9a11836342370f4817622a2f0f418b134426d91a82dfb48f532d2ec13ef"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
-]
-
-[[package]]
-name = "web_server"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "dotenvy",
- "jsonwebtoken",
- "lettre",
- "migration",
- "mockall",
- "poem",
- "poem-openapi",
- "sea-orm",
- "serde",
- "serde_json",
- "tera",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "uuid",
- "validator",
 ]
 
 [[package]]

@@ -1,3 +1,3 @@
-pub mod server;
+pub mod app;
 pub mod capabilities;
 

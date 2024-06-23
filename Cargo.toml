@@ -1,5 +1,5 @@
 [package]
-name = "web_server"
+name = "server"
 version = "0.1.0"
 edition = "2021"
 authors = ["Shivam Mathur <shivam@kodingkorp.com>"]
