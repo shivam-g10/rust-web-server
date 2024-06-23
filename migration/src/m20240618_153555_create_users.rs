@@ -26,22 +26,7 @@ impl MigrationTrait for Migration {
                     )
                     .col(ColumnDef::new(Users::FirstName).string().not_null())
                     .col(ColumnDef::new(Users::LastName).string().not_null())
-                    .col(ColumnDef::new(Users::LoginToken).string().null())
-                    .col(ColumnDef::new(Users::LoginSentAt).timestamp().null())
-                    .col(ColumnDef::new(Users::ResetToken).string().null())
-                    .col(ColumnDef::new(Users::ResetSentAt).timestamp().null())
-                    .col(
-                        ColumnDef::new(Users::EmailVerificationToken)
-                            .string()
-                            .null(),
-                    )
-                    .col(
-                        ColumnDef::new(Users::EmailVerificationSentAt)
-                            .timestamp()
-                            .null(),
-                    )
-                    .col(ColumnDef::new(Users::EmailVerifiedAt).timestamp().null())
-                    .col(sea_query::ColumnDef::new(Users::Status).string_len(1))
+                    .col(ColumnDef::new(Users::Password).string().null())
                     .col(
                         ColumnDef::new(Users::CreatedAt)
                             .timestamp()
@@ -75,14 +60,7 @@ pub enum Users {
     Email,
     FirstName,
     LastName,
-    LoginToken,
-    LoginSentAt,
-    ResetToken,
-    ResetSentAt,
-    EmailVerificationToken,
-    EmailVerificationSentAt,
-    EmailVerifiedAt,
-    Status,
+    Password,
     CreatedAt,
     UpdatedAt,
 }

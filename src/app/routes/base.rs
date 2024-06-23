@@ -1,7 +1,7 @@
 use poem::web::Data;
 use poem_openapi::{payload::Json, ApiResponse, Object, OpenApi, Tags};
 
-use crate::capabilities::common::inter_service_models::app_state::AppState;
+use crate::app::capabilities::common::inter_service_models::app_state::AppState;
 
 #[derive(Debug, Object, Clone, Eq, PartialEq)]
 pub struct Ping {
@@ -10,7 +10,6 @@ pub struct Ping {
 #[derive(Debug, Object, Clone, Eq, PartialEq)]
 pub struct Health {
     db: bool,
-    cache: bool,
 }
 
 #[derive(ApiResponse)]
@@ -54,7 +53,6 @@ impl Api {
         }
         HealthResponse::Ok(Json(Health {
             db: db_state,
-            cache: false
         }))
     }
 }

@@ -1,7 +1,7 @@
 use std::path::Path;
 
 use poem::listener::TcpListener;
-use server::app::bootstrap::{build_app, make_app_state};
+use server::app::bootstrap::build_app;
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
@@ -16,9 +16,8 @@ async fn main() -> Result<(), std::io::Error> {
     let port = std::env::var("PORT").expect("PORT is not set in .env file");
     let server_url = format!("{host}:{port}");
 
-    let state = make_app_state().await;
 
-    let app = build_app(state);
+    let app = build_app().await;
 
     poem::Server::new(TcpListener::bind(server_url))
         .run(app)

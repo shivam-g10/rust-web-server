@@ -23,9 +23,8 @@ dotenvy = "0.15.7"
 serde = { version = "1.0.203", features = ["derive"] }
 serde_json = "1.0.117"
 chrono = "0.4.38"
-lettre = "0.11.7"
-tera = "1.20.0"
 jsonwebtoken = "9.3.0"
 validator = { version = "0.18.1", features = ["derive", "validator_derive"] } 
 sea-orm = { version = "0.12.15", features = ["sqlx-postgres", "runtime-tokio-native-tls", "with-uuid"] }
 mockall = "0.12.1"
+bcrypt = "0.15.1"

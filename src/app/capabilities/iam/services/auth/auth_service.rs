@@ -1,11 +1,10 @@
-use crate::capabilities::{
-    common::config::config_service::ConfigService, iam::{entities::sessions, enums::auth_error::AuthError},
+use crate::app::capabilities::{
+    common::config::config_service::ConfigService, iam::enums::auth_error::AuthError,
 };
+use bcrypt::{hash, verify, DEFAULT_COST};
 use chrono::Utc;
 use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
-use sea_orm::{ColumnTrait, DatabaseConnection, EntityTrait, QueryFilter, Set};
 use serde::{Deserialize, Serialize};
-use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims<T> {
@@ -18,15 +17,13 @@ pub struct Claims<T> {
 pub struct AuthSerivce{
     /// Config service to extract auth config
     config: ConfigService,
-    db: DatabaseConnection,
 }
 
 impl AuthSerivce {
     /// Create new auth service instance
-    pub fn new(config: &ConfigService, db: DatabaseConnection) -> Self {
+    pub fn new(config: &ConfigService) -> Self {
         return Self {
             config: *config,
-            db,
         };
     }
     /// Create jwt from payload
@@ -91,53 +88,16 @@ impl AuthSerivce {
         }
     }
 
-    /// Create session for user
-    pub async fn create_session(&self, user_id: i32) -> Result<sessions::Model, AuthError> {
-        let session = sessions::ActiveModel {
-            session_id: Set(Uuid::new_v4()),
-            user_id: Set(user_id),
-            ..Default::default()
-        };
-        let insert_result = sessions::Entity::insert(session)
-            .exec_with_returning(&self.db)
-            .await;
-        match insert_result {
-            Ok(session) => Ok(session),
-            Err(e) => {
-                tracing::error!("{}", e);
-                Err(AuthError::InternalServerError)
-            }
-        }
+    /// Create hash of string
+    pub fn hash(&self, string: String) -> String {
+        hash(string, DEFAULT_COST).unwrap()
     }
 
-    /// Delete single session
-    pub async fn delete_session(&self, session_id: Uuid) -> Result<(), AuthError> {
-        let session = sessions::ActiveModel {
-            session_id: Set(session_id),
-            ..Default::default()
-        };
-        let delete_result = sessions::Entity::delete(session).exec(&self.db).await;
-        match delete_result {
-            Ok(_) => Ok(()),
-            Err(e) => {
-                tracing::error!("{}", e);
-                Err(AuthError::InternalServerError)
-            }
-        }
-    }
-
-    /// Log out all user sessions
-    pub async fn delete_all_sessions(&self, user_id: i32) -> Result<(), AuthError> {
-        let delete_result = sessions::Entity::delete_many()
-            .filter(sessions::Column::UserId.eq(user_id))
-            .exec(&self.db)
-            .await;
-        match delete_result {
-            Ok(_) => Ok(()),
-            Err(e) => {
-                tracing::error!("{}", e);
-                Err(AuthError::InternalServerError)
-            }
+    /// verify a hash
+    pub fn bcrypt_verify_hash(&self, string: String, hash: String) -> bool {
+        match verify(string, &hash) {
+            Ok(_) => true,
+            Err(_) => false,
         }
     }
 }

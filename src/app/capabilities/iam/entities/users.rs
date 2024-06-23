@@ -19,23 +19,7 @@ pub struct Model {
     pub email: String,
     pub first_name: String,
     pub last_name: String,
-    pub login_token: Option<String>,
-    pub login_sent_at: Option<String>,
-    pub reset_token: Option<String>,
-    pub reset_sent_at: Option<DateTime>,
-    pub email_verification_token: Option<String>,
-    pub email_verification_sent_at: Option<DateTime>,
-    pub email_verified_at: Option<DateTime>,
-    pub status: Status
-}
-
-#[derive(EnumIter, DeriveActiveEnum, Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
-#[sea_orm(rs_type = "String", db_type = "String(Some(1))")]
-pub enum Status {
-    #[sea_orm(string_value = "A")]
-    Active,
-    #[sea_orm(string_value = "D")]
-    Deleted,
+    pub password: Option<String>,
 }
 
 
@@ -50,6 +34,8 @@ pub struct Validator {
     pub last_name: String,
     #[validate(email)]
     pub email: String,
+    #[validate(length(min = 8, message = "Password must be at least 8 characters long."))]
+    pub password: String,
 }
 
 
@@ -59,6 +45,7 @@ impl ActiveModel {
             first_name: self.first_name.as_ref().to_owned(),
             last_name: self.last_name.as_ref().to_owned(),
             email: self.email.as_ref().to_owned(),
+            password: self.password.as_ref().to_owned().unwrap(),
         }
     }
 }
