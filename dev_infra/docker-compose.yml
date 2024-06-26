@@ -2,13 +2,14 @@ version: '3.5'
 services:
     postgresql:
         container_name: postgresql_kodingkorp
+        restart: unless-stopped
         environment:
             POSTGRES_PASSWORD: postgres
             POSTGRES_USER: postgres
+            PGDATA : /var/lib/postgresql/data/pgdata
         image: postgres:latest
-        network_mode: host
-        expose:
-            - 5432
+        ports:
+            - 5432:5432
         volumes:
         - ./postgres_data:/var/lib/postgresql/data
         - ./create-db.sql:/docker-entrypoint-initdb.d/create_database.sql
@@ -18,7 +19,5 @@ services:
         ports:
             - 1080:1080
             - 1025:1025
-        network_mode: host
-
 volumes:
     postgres_data:
